@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+</head>
+<body>
+  <div id="search">
+    <input type="text" class="form" v-model="keyword">
+    <ul>
+      <li v-for="user in keyusers" :key="user.id">{{user.name}}</li>
+    </ul>
+  </div>
+</body>
+<script>
+  const vm = new Vue({
+    el:"#search",
+    data:{
+      keyword:"",
+      users:[
+      {
+          id: 1,
+          name: "佐藤"
+      },
+      {
+          id: 2,
+          name: "山田"
+        },
+      {
+          id: 3,
+          name: "鈴木"
+        },
+      {
+          id: 4,
+          name: "田中"
+        },
+      ]
+    },
+    computed:{
+      keyusers:function(){
+        var keyusers = [];
+        // this.users.forEach(function(element){
+        //   if(element.name.indexof("this.keyword") !== -1){
+        //     keyusers.push(element);
+        //     }
+        for (var i in this.users) {
+          var user = this.users[i];
+          if (user.name.indexOf(this.keyword) !== -1) {
+              keyusers.push(user);
+          }
+        } 
+        return keyusers;
+      }
+    }
+  })
+</script>
+<style>
+  .form{
+    border: solid 3px orange;
+    width: 200px;
+    padding: 5px 20px;
+  }
+  ul{
+    padding: 0px;
+    margin: 0px;    
+  }
+  li{
+    font-size: 30px;
+    list-style: none;
+    padding: 0px;
+    margin: 0px;
+  }
+</style>
+</html>
